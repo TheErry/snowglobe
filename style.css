@@ -1,0 +1,226 @@
+:root {
+  --bg-color: #1f6929; /* Change to your own bg color */
+  --side-gradient: linear-gradient(
+    87deg,
+    rgba(140, 140, 140, 1) 0%,
+    rgba(208, 208, 208, 1) 8%,
+    rgba(140, 140, 140, 1) 50%,
+    rgba(208, 208, 208, 1) 92%,
+    rgba(140, 140, 140, 1) 100%
+  );
+  --top-gradient: linear-gradient(87deg, rgba(140, 140, 140, 1) 55%, rgba(208, 208, 208, 1) 92%);
+}
+
+html,
+body {
+  background: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  width: 400px;
+}
+
+/*************************/
+/******* SNOW GLOBE ******/
+/*************************/
+
+.snow-globe {
+  margin: auto;
+}
+
+.globe-wrapper {
+  display: flex;
+  z-index: 1;
+  margin: auto;
+  width: 500px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  /* To cut off bottom part of globe 👇 */
+  clip-path: ellipse(75% 48% at 50% 48%);
+  -webkit-clip-path: ellipse(75% 48% at 50% 48%);
+}
+
+.globe {
+  display: flex;
+  z-index: 1;
+  border-radius: 50%;
+  margin: auto;
+  width: 95%;
+  height: 95%;
+  top: 10px;
+  position: relative;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(206, 240, 255, 0.4234068627450981) 100%
+  );
+  border: 1px solid white;
+}
+
+.globe-inner {
+  width: 95%;
+  height: 95%;
+  padding: 10px;
+  position: relative;
+  margin: auto;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+  background-image: url(hasse.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+}
+
+/* // GLOBE SHINE */
+.globe-inner:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0) 50%, rgba(206, 240, 255, 1) 100%);
+}
+
+/*************************/
+/********* BASE OF THE GLOBE **********/
+/*************************/
+
+.base {
+  bottom: 70px;
+  z-index: 0;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plate-top {
+  width: 100%;
+  height: 60px;
+  background: var(--top-gradient);
+  border-radius: 50%;
+  position: relative;
+  z-index: 3;
+}
+
+.plate-sides {
+  content: '';
+  width: 100%;
+  height: 20px;
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  background: var(--side-gradient);
+  z-index: 2;
+}
+
+.plate-bottom {
+  content: '';
+  width: 100%;
+  height: 60px;
+  display: block;
+  position: absolute;
+  bottom: -19px;
+  left: 0;
+  right: 0;
+  background: var(--side-gradient);
+
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.base-top {
+  position: relative;
+  z-index: 3;
+  width: 60%;
+}
+
+.base-bottom {
+  position: relative;
+  z-index: 2;
+  width: 75%;
+  top: -40px;
+}
+
+.base-bottom .plate-top {
+  height: 70px;
+}
+
+.base-bottom .plate-sides {
+  height: 90px;
+  bottom: -55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.base-bottom .plate-bottom {
+  bottom: -85px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 40px;
+  margin: 60px auto 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.button {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 57%, rgba(140, 140, 140, 1) 120%);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.button:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 5px;
+  bottom: 5px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(221, 185, 0, 1) 23%);
+  background-size: 200% 200%;
+  background-position: 41% 66%;
+  transition: all 0.26s ease-in-out;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+input:checked + .button:before {
+  transform: translateX(60px);
+}
+
+/*************************/
+/********* SNOW **********/
+/*************************/
+
+.flake {
+  position: absolute;
+  opacity: 1;
+}
